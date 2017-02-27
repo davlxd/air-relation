@@ -10,7 +10,11 @@ Rails.application.routes.draw do
 
   get '/relation/conversations', to: 'conversation#get_conversations'
   get '/relation/conversations/:id', to: 'conversation#get_conversation_detail' #TODO Am I owner?; :id constraints
-  get '/relation/conversation-id', to: 'conversation#get_conversation_id_by_friend_id' #TODO with params `by`
-  delete '/relation/conversations/:conversation_id/members/:member_id', to: 'conversation#remove_conversation_member' #TODO must be owner; constraints
+
+  get '/relation/conversation-id', to: 'conversation#get_conversation_id_by_friend_id'
+
+  post '/relation/conversations/:conversation_id/members/:member_id', to: 'conversation#add_conversation_member' #TODO :id constraints; generate owner
+  delete '/relation/conversations/:conversation_id/members/:member_id', to: 'conversation#remove_conversation_member' #TODO must be owner; :id constraints
+
   delete '/relation/conversations/:id', to: 'conversation#opt_out_conversation' #TODO existence, owner replacement, not for dual; constraints
 end
